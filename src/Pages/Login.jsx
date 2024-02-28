@@ -64,9 +64,9 @@ const Login = () => {
                     
                 <button
                     type='sumbit'
-                    className='btn font-roboto'
+                    className='btn font-roboto max-sm:text-[10px] max-sm:w-min max-sm:px-2 '
                 >
-                    <span>Login</span>
+                    <span className='max-sm:text-[10px]'>Login</span>
                 </button>
 
                 <Link

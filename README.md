@@ -53,7 +53,7 @@ To run the application locally, follow these steps:
 - Authenticate user can see the comments on Posts
 - Log out of the application but your details save. If user delete his account then register another account and login.
 
-
+**note :** See `create,updated,delete` data on console.
 
 
 ## Optimizations

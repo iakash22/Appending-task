@@ -1,5 +1,6 @@
 import { addUserData, setUserAuthenticate } from "../redux/authSlice";
 import { toast } from 'react-hot-toast';
+import axios from "axios";
 
 export const registerUser = (data) => {
     return (disptach) => {
@@ -96,4 +97,102 @@ export const deleteAccount = (setOpen) => {
             toast.dismiss(toastId);
         }, 1500);
     }
+}
+
+
+// Post Services
+
+export const searchHandler = async (setLoading,serchText,setData) => {
+    setLoading(true);
+    try {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${serchText}`);
+        setData(response?.data);
+        if (!response || response?.data.length <= 0) {
+            throw new Error('User id is invalid');
+        }
+        console.log(response);
+    } catch (err) {
+        toast.error(err.message);
+        console.log(err);
+    }
+    setLoading(false);
+}
+
+export const getPostData = async (setLoading,setPostData) => {
+    setLoading(true);
+    try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        if (!response) {
+            throw new Error('Post data is not fetch, please try later!')
+        }
+        setPostData(response?.data);
+        console.log(response)
+    } catch (err) {
+        console.log(err);
+    }
+    setLoading(false);
+}
+
+export const createPostHandler = async (setLoading, data) => {
+    setLoading(true);
+    try {
+        const response = await axios.post('https://jsonplaceholder.typicode.com/posts', data);
+        if (!response) {
+            throw new Error("Create not created, some error occurred");
+        }
+        toast.success('Post Created');
+        console.log(response);
+    } catch (err) {
+        console.log(err);
+        toast.error(err.message);
+    }
+    setLoading(false);
+}
+
+export const updatePostHandler = async (setLoading,data,setOpen) => {
+    const toastId = toast.loading('Loading...');
+    setLoading(true);
+    try {
+        const response = await axios.put(
+            `https://jsonplaceholder.typicode.com/posts/${postId}`,
+            {
+                title: data.title,
+                body: data.body,
+                id: postId,
+                userId
+            },
+        );
+        if (!response) {
+            throw new Error('Post not updated, Please try again later')
+        }
+        toast.success('Post Updated.');
+        setOpen(false);
+        console.log(response);
+    } catch (err) {
+        toast.error(err.message);
+        console.log(err);
+    }
+    setLoading(false);
+    toast.dismiss(toastId);
+}
+
+export const deletePostHandler = async (setLoading,postId,setOpen) => {
+    const toastId = toast.loading('Loading...');
+    setLoading(true);
+    try {
+        const response = await axios.delete(
+            `https://jsonplaceholder.typicode.com/posts/${postId}`
+        );
+        if (!response) {
+            throw new Error('Post not deleted, Please try again later')
+        }
+        toast.success('Post Deleted.');
+        setOpen(false);
+        console.log(response);
+    }catch (err) {
+        toast.error(err.message);
+        console.log(err);
+    }
+    setLoading(false);
+    toast.dismiss(toastId);
 }

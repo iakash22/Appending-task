@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 import { Box, Button, Modal,TextField } from '@mui/material';
-import toast from 'react-hot-toast';
-import axios from 'axios';
 
 const EditPostModal = ({ open, setOpen, title, body, postId, userId,handler }) => {
     const [data, setData] = useState({ title, body });
     const [loading, setLoading] = useState(false);
-    // console.log(postId);
 
     const changeHandler = (event) => {
         const { name, value } = event.target;
@@ -55,7 +52,7 @@ const EditPostModal = ({ open, setOpen, title, body, postId, userId,handler }) =
                         variant='outlined'
                         color='primary'
                         size='small'
-                        onClick={() => handler(setLoading,data)}
+                        onClick={() => handler(setLoading,data,setOpen)}
                     >
                         {loading ? 'Updating...' : 'Update'}
                     </Button>

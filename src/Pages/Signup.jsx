@@ -75,9 +75,9 @@ const Signup = () => {
 
                 <button
                     type='sumbit'
-                    className='btn font-roboto'
+                    className='btn font-roboto btn max-sm:text-[10px] max-sm:w-min max-sm:px-2'
                 >
-                    <span>{loading ? 'Registering...' : 'Register'}</span>
+                    <span className='max-sm:text-[10px]'>{loading ? 'Registering...' : 'Register'}</span>
                 </button>
 
                 <p className='self-end max-sm:self-center text-[rgba(0,0,0,0.342)] m-[2vmax] font-roboto'>

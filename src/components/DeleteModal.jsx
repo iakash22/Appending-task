@@ -1,9 +1,7 @@
-import axios from 'axios';
 import React, { useState } from 'react'
-import { Box, Button, Modal, Typography } from '@mui/material';
-import toast from 'react-hot-toast';
+import { Box, Button, Modal } from '@mui/material';
 
-const DeleteModal = ({ open, setOpen, handler, title}) => {
+const DeleteModal = ({ open, setOpen, handler, title, postId}) => {
     const [loading, setLoading] = useState(false);
     
     return (
@@ -31,7 +29,7 @@ const DeleteModal = ({ open, setOpen, handler, title}) => {
                         variant='outlined'
                         color='error'
                         size='small'
-                        onClick={() => handler(setLoading)}
+                        onClick={() => handler(setLoading,postId,setOpen)}
                     >
                         {loading ? 'Deleting...' : 'Delete'}
                     </Button>

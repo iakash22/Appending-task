@@ -1,28 +1,16 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Post from '../components/Post';
+import { getPostData } from '../Services';
 
 
 const Home = () => {
     const [postData, setPostData] = useState([]);
     const [loading, setLoading] = useState(false);
+
     useEffect(() => {
-        getPostData();
+        getPostData(setLoading,setPostData);
     }, []);
-    const getPostData = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-            if (!response) {
-                throw new Error('Post data is not fetch, please try later!')
-            }
-            setPostData(response?.data);
-            console.log(response)
-        } catch (err) {
-            console.log(err);
-        }
-        setLoading(false);
-    }
+    
     return (
         <div className='h-full bg-gradient-to-r from-[#fff5bc] to-[#cec1ff] flex flex-col items-center
                         justify-center p-[2vmax] box-border'

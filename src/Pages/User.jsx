@@ -33,9 +33,9 @@ const User = () => {
                 </div>
                 <button
                     onClick={async() => await dispatch(loggedOut())}
-                    className='btn'
+                    className='btn max-sm:text-[10px] max-sm:w-min max-sm:px-2 '
                 >
-                    <span className='text-neutral-600 font-roboto'>Logout</span>
+                    <span className='text-neutral-600 font-roboto max-sm:text-[10px]'>Logout</span>
                 </button>
 
                 <button
