@@ -42,7 +42,7 @@ const CreatePost = () => {
                     onChange={changeHandler}
                     placeholder='Title'
                     required
-                    className='w-full p-[1vmax] rounded-[30px] border-none outline-none font-thin text-[1.2rem] font-roboto'
+                    className='w-full p-[1vmax] rounded-[30px] border-none outline-none font-thin text-[1.2rem] font-roboto max-sm:mb-2'
                 />
                 <input
                     type="text"
@@ -52,7 +52,7 @@ const CreatePost = () => {
                     onChange={changeHandler}
                     placeholder='Body'
                     required
-                    className='w-full p-[1vmax] rounded-[30px] border-none outline-none font-thin text-[1.2rem] font-roboto'
+                    className='w-full p-[1vmax] rounded-[30px] border-none outline-none font-thin text-[1.2rem] font-roboto max-sm:my-3'
                 />
 
                 <button
