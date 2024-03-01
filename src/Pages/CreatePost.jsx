@@ -31,7 +31,7 @@ const CreatePost = () => {
         <div className='min-h-screen bg-gradient-to-r from-[#fff5bc] to-[#cec1ff] flex items-center justify-center p-[2vmax] box-border'>
             <form
                 onSubmit={submitHandler}
-                className='bg-white h-full w-2/4 rounded-[30px] box-border p-[2vmax] flex flex-col items-center'
+                className='bg-white h-full w-2/4 max-sm:w-full rounded-[30px] box-border p-[2vmax] flex flex-col items-center'
             >
                 <h3 className='m-[2vmax] text-3xl font-semibold font-roboto'>Create new post</h3>
                 <input

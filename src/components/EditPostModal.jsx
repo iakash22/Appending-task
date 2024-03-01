@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box, Button, Modal,TextField } from '@mui/material';
 
 const EditPostModal = ({ open, setOpen, title, body, postId, userId,handler }) => {
-    const [data, setData] = useState({ title, body });
+    const [data, setData] = useState({ title, body, postId, userId});
     const [loading, setLoading] = useState(false);
 
     const changeHandler = (event) => {

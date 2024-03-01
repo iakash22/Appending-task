@@ -154,12 +154,12 @@ export const updatePostHandler = async (setLoading,data,setOpen) => {
     setLoading(true);
     try {
         const response = await axios.put(
-            `https://jsonplaceholder.typicode.com/posts/${postId}`,
+            `https://jsonplaceholder.typicode.com/posts/${data?.postId}`,
             {
                 title: data.title,
                 body: data.body,
-                id: postId,
-                userId
+                id: data.postId,
+                userId : data.userId
             },
         );
         if (!response) {
