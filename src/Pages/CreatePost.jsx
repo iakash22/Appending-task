@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { createPostHandler } from '../Services';
+import NewPost from '../components/NewPost';
 
 const initialValue = {
     title: "",
@@ -10,6 +11,8 @@ const initialValue = {
 const CreatePost = () => {
     const [data, setData] = useState(initialValue);
     const [loading, setLoading] = useState(false);
+    const [createPostData, setcreatePostData] = useState([]);
+    // console.log(createPostData);
 
     // userId = 1 -> Default
     //because api users has 1 to 10 userId and json api does not changes actually
@@ -23,12 +26,12 @@ const CreatePost = () => {
     const submitHandler = (event) => {
         event.preventDefault();
         const newData = { ...data, userId: userId };
-        createPostHandler(setLoading, newData);
+        createPostHandler(setLoading, newData, setcreatePostData);
         setData(initialValue);
     }
 
     return (
-        <div className='min-h-screen bg-gradient-to-r from-[#fff5bc] to-[#cec1ff] flex items-center justify-center p-[2vmax] box-border'>
+        <div className='min-h-screen bg-gradient-to-r from-[#fff5bc] to-[#cec1ff] flex flex-col gap-5 items-center justify-center p-[2vmax] box-border'>
             <form
                 onSubmit={submitHandler}
                 className='bg-white h-full w-2/4 max-sm:w-full rounded-[30px] box-border p-[2vmax] flex flex-col items-center'
@@ -62,6 +65,24 @@ const CreatePost = () => {
                     <span className='max-sm:text-[10px]'>{loading ? 'Creating...' : 'Create Post'}</span>
                 </button>
             </form>
+            <>
+                {
+                    createPostData && createPostData.length > 0 ?
+                        createPostData.map((post, index) => (
+                            <NewPost
+                                key={index}
+                                title={post?.title}
+                                body={post?.body}
+                                userId={post?.userId}
+                                postId={index}
+                                postData={createPostData}
+                                setPostData={setcreatePostData}
+                            />
+                        ))
+                        :
+                        <div className='text-lg text-neutral-400 font-roboto font-thin'>Your Post...</div>
+                }
+            </>
         </div>
     )
 }

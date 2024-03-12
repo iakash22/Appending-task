@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Box, Button, Modal } from '@mui/material';
 
-const DeleteModal = ({ open, setOpen, handler, title, postId}) => {
+const DeleteModal = ({ open, setOpen, handler, title, postId, postData, setPostData}) => {
     const [loading, setLoading] = useState(false);
     
     return (
@@ -29,7 +29,7 @@ const DeleteModal = ({ open, setOpen, handler, title, postId}) => {
                         variant='outlined'
                         color='error'
                         size='small'
-                        onClick={() => handler(setLoading,postId,setOpen)}
+                        onClick={() => handler(setLoading,postId,setOpen,postData,setPostData )}
                     >
                         {loading ? 'Deleting...' : 'Delete'}
                     </Button>

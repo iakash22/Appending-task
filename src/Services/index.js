@@ -126,14 +126,14 @@ export const getPostData = async (setLoading,setPostData) => {
             throw new Error('Post data is not fetch, please try later!')
         }
         setPostData(response?.data);
-        console.log(response)
+        // console.log(response)
     } catch (err) {
         console.log(err);
     }
     setLoading(false);
 }
 
-export const createPostHandler = async (setLoading, data) => {
+export const createPostHandler = async (setLoading, data, setData) => {
     setLoading(true);
     try {
         const response = await axios.post('https://jsonplaceholder.typicode.com/posts', data);
@@ -141,6 +141,7 @@ export const createPostHandler = async (setLoading, data) => {
             throw new Error("Create not created, some error occurred");
         }
         toast.success('Post Created');
+        setData(prev => ([...prev, response?.data]))
         console.log(response);
     } catch (err) {
         console.log(err);
@@ -149,7 +150,7 @@ export const createPostHandler = async (setLoading, data) => {
     setLoading(false);
 }
 
-export const updatePostHandler = async (setLoading,data,setOpen) => {
+export const updatePostHandler = async (setLoading,data,setOpen,postData,setPostData) => {
     const toastId = toast.loading('Loading...');
     setLoading(true);
     try {
@@ -165,7 +166,13 @@ export const updatePostHandler = async (setLoading,data,setOpen) => {
         if (!response) {
             throw new Error('Post not updated, Please try again later')
         }
+
         toast.success('Post Updated.');
+        const updataData = postData.map((post) => post.id === data.postId ? {
+            ...post, title: data.title, body: data.body,
+        } : post);
+
+        setPostData(updataData);
         setOpen(false);
         console.log(response);
     } catch (err) {
@@ -176,7 +183,7 @@ export const updatePostHandler = async (setLoading,data,setOpen) => {
     toast.dismiss(toastId);
 }
 
-export const deletePostHandler = async (setLoading,postId,setOpen) => {
+export const deletePostHandler = async (setLoading,postId,setOpen,postData,setPostData) => {
     const toastId = toast.loading('Loading...');
     setLoading(true);
     try {
@@ -187,6 +194,9 @@ export const deletePostHandler = async (setLoading,postId,setOpen) => {
             throw new Error('Post not deleted, Please try again later')
         }
         toast.success('Post Deleted.');
+        const newData = postData.filter((post) => post.id !== postId);
+        setPostData(newData);
+        // console.log(newData);
         setOpen(false);
         console.log(response);
     }catch (err) {

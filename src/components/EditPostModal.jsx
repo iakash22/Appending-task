@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Box, Button, Modal,TextField } from '@mui/material';
 
-const EditPostModal = ({ open, setOpen, title, body, postId, userId,handler }) => {
+const EditPostModal = ({ open, setOpen, title, body, postId, userId,handler,postData, setPostData}) => {
     const [data, setData] = useState({ title, body, postId, userId});
     const [loading, setLoading] = useState(false);
 
@@ -52,7 +52,7 @@ const EditPostModal = ({ open, setOpen, title, body, postId, userId,handler }) =
                         variant='outlined'
                         color='primary'
                         size='small'
-                        onClick={() => handler(setLoading,data,setOpen)}
+                        onClick={() => handler(setLoading,data,setOpen,postData,setPostData)}
                     >
                         {loading ? 'Updating...' : 'Update'}
                     </Button>

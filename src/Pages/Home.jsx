@@ -33,6 +33,8 @@ const Home = () => {
                                 body={post?.body}
                                 userId={post?.userId}
                                 postId={post?.id}
+                                postData={postData}
+                                setPostData={setPostData}
                             />
                         ))
                     )

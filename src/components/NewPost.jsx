@@ -3,12 +3,45 @@ import React, { useState } from 'react'
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import EditPostModal from './EditPostModal';
 import DeleteModal from './DeleteModal';
-import { deletePostHandler, updatePostHandler } from '../Services';
+import toast from 'react-hot-toast';
 
 
-const Post = ({ title, body, userId, postId, postData, setPostData}) => {
+const NewPost = ({ title, body, userId, postId, postData, setPostData }) => {
     const [updateModal, setUpdateModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
+    console.log(postId);
+
+    const updatePostHandler = (setLoading, data, setOpen, postData, setPostData) => {
+        const toastId = toast.loading('Loading...');
+        setLoading(true);
+        setTimeout(() => {
+            const updataData = postData.map((post, index) => index === postId ? {
+                ...post, title: data.title, body: data.body,
+            } : post);
+            toast.dismiss(toastId);
+            // console.log(updataData);
+            toast.success('Post Updated.');
+            setPostData(updataData);
+            setOpen(false);
+            setLoading(false)
+        }, 500);
+    }
+
+    const deletePostHandler = (setLoading, postId, setOpen, postData, setPostData) => {
+        const toastId = toast.loading('Loading...');
+        console.log(postId);
+        setLoading(true);
+        setTimeout(() => {
+            toast.dismiss(toastId);
+            // console.log(updataData);
+            toast.success('Post Deleted.');
+            const newData = postData.filter((post,index) => index !== postId);
+            console.log(newData)
+            setPostData(newData);
+            setOpen(false);
+            setLoading(false)
+        }, 500);
+    }
 
     return (
         <div className='my-3 max-sm:w-full p-3 md:w-2/3 bg-[#fff] rounded-lg'>
@@ -62,4 +95,4 @@ const Post = ({ title, body, userId, postId, postData, setPostData}) => {
     )
 }
 
-export default Post
+export default NewPost;
